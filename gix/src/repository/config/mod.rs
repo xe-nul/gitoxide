@@ -161,6 +161,13 @@ impl crate::Repository {
             .unwrap_or(config::section::is_trusted)
     }
 
+    // Dunno how to name this function....
+    //
+    // `filter_config_section_section` is a strong contender though
+    pub(crate) fn gay_awesome_filter_config_selection(&self) -> fn(&gix_config::file::Section) -> bool {
+        self.options.gay_awesome_filter_config_section.unwrap_or(|_| true)
+    }
+
     fn subsection_str_names_of<'a>(&'a self, header_name: &'a str) -> BTreeSet<&'a str> {
         self.config
             .resolved

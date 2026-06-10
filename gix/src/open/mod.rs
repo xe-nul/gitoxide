@@ -30,6 +30,7 @@ pub struct Options {
     pub(crate) git_dir_trust: Option<gix_sec::Trust>,
     /// Warning: this one is copied to config::Cache - don't change it after repo open or keep in sync.
     pub(crate) filter_config_section: Option<fn(&gix_config::file::Metadata) -> bool>,
+    pub(crate) gay_awesome_filter_config_section: Option<fn(&gix_config::file::Section) -> bool>,
     pub(crate) lossy_config: bool,
     pub(crate) lenient_config: bool,
     pub(crate) bail_if_untrusted: bool,

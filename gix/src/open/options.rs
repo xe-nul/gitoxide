@@ -10,6 +10,7 @@ impl Default for Options {
             permissions: Default::default(),
             git_dir_trust: None,
             filter_config_section: None,
+            gay_awesome_filter_config_section: None,
             lossy_config: false,
             lenient_config: true,
             bail_if_untrusted: false,
@@ -120,6 +121,11 @@ impl Options {
         self
     }
 
+    pub fn gay_awesome_filter_config_section(mut self, filter: fn(&gix_config::file::Section) -> bool) -> Self {
+        self.gay_awesome_filter_config_section = Some(filter);
+        self
+    }
+
     /// If set, default is false, configuration will be read without retaining non-essential information like comments
     /// or whitespace to optimize lookup performance.
     ///
@@ -162,6 +168,7 @@ impl gix_sec::trust::DefaultForLevel for Options {
                 permissions: Permissions::default_for_level(level),
                 git_dir_trust: gix_sec::Trust::Full.into(),
                 filter_config_section: Some(config::section::is_trusted),
+                gay_awesome_filter_config_section: Some(|_| true),
                 lossy_config: false,
                 bail_if_untrusted: false,
                 lenient_config: true,
@@ -175,6 +182,7 @@ impl gix_sec::trust::DefaultForLevel for Options {
                 permissions: Permissions::default_for_level(level),
                 git_dir_trust: gix_sec::Trust::Reduced.into(),
                 filter_config_section: Some(config::section::is_trusted),
+                gay_awesome_filter_config_section: Some(|_| true),
                 bail_if_untrusted: false,
                 lenient_config: true,
                 open_path_as_is: false,

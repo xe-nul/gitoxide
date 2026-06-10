@@ -167,6 +167,7 @@ impl ThreadSafeRepository {
             ref mut git_dir_trust,
             object_store_slots,
             filter_config_section,
+            gay_awesome_filter_config_section: _,
             lossy_config,
             lenient_config,
             bail_if_untrusted,

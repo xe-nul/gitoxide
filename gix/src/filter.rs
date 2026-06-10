@@ -296,6 +296,7 @@ fn extract_drivers(repo: &Repository) -> Result<Vec<gix_filter::Driver>, pipelin
         .into_iter()
         .flatten()
         .filter(|s| repo.filter_config_section()(s.meta()))
+        .filter(|s| repo.gay_awesome_filter_config_selection()(s))
         .filter_map(|s| {
             s.header().subsection_name().map(|name| {
                 Ok(gix_filter::Driver {
